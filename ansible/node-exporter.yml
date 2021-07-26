@@ -1,0 +1,21 @@
+- name: Transfer and execute a script node exporter
+  hosts: all
+  remote_user: hipzi
+  become: yes
+  vars_files:
+    - vars/monitoring.yml
+
+  tasks:
+
+    - name: Creates directory
+      file:
+        path: /home/hipzi/node_exporter
+        state: directory
+
+    - name: Transfer the script node exporter
+      template: 
+        src: templates/node_exporter.sh.j2
+        dest: /home/hipzi/node_exporter/node_exporter.sh
+
+    - name: Execute the script node exporter
+      command: bash /home/hipzi/node_exporter/node_exporter.sh

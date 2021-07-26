@@ -1,0 +1,21 @@
+- name: Transfer and execute a script mysql exporter
+  hosts: dbservers
+  remote_user: hipzi
+  become: yes
+  vars_files:
+    - vars/monitoring.yml
+
+  tasks:
+
+    - name: Creates directory
+      file:
+        path: /home/hipzi/mysql_exporter
+        state: directory
+
+    - name: Transfer the script mysql exporter
+      template: 
+        src: templates/mysql_exporter.sh.j2
+        dest: /home/hipzi/mysql_exporter/mysql_exporter.sh
+
+    - name: Execute the script mysql exporter
+      command: bash /home/hipzi/mysql_exporter/mysql_exporter.sh

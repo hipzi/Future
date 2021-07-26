@@ -1,0 +1,21 @@
+- name: Transfer and execute a docker compose grafana
+  hosts: haproxy
+  remote_user: hipzi
+  become: yes
+
+  tasks:
+
+    - name: Creates directory
+      file:
+        path: /home/hipzi/grafana
+        state: directory
+
+    - name: Transfer directory grafana
+      copy: 
+        src: /home/hipzi/docker/grafana/
+        dest: /home/hipzi/grafana/
+
+    - name: Execute the docker compose grafana
+      shell:
+        chdir: /home/hipzi/grafana/
+        cmd: docker-compose up -d 

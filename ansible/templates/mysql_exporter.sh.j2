@@ -1,0 +1,47 @@
+#!/bin/sh
+
+mysql_exporter_version={{ version.mysql_exporter }}
+HOST={{ ansible_hostname }}
+MYSQL_ROOT_USER={{ mysqluser.root }}
+MYSQL_ROOT_PASSWORD={{ mysqlpass.root }}
+MYSQL_USER_MONITORING={{ mysqluser.monitoring }}  
+MYSQL_USER_PASSWORD_MONITORING={{ mysqlpass.monitoring }}
+
+sudo useradd -r -s /bin/false mysqlexporter
+yum -y update
+yum -y install curl
+curl -LO https://github.com/prometheus/mysqld_exporter/releases/download/v${mysql_exporter_version}/mysqld_exporter-${mysql_exporter_version}.linux-amd64.tar.gz
+tar -xvzf mysqld_exporter-${mysql_exporter_version}.linux-amd64.tar.gz
+cp mysqld_exporter-${mysql_exporter_version}.linux-amd64/mysqld_exporter /usr/local/bin/
+rm -rf mysqld_exporter-${mysql_exporter_version}.linux-amd64*
+sudo chown mysqlexporter:mysqlexporter /usr/local/bin/mysqld_exporter
+
+mysql -h $HOST "-u$MYSQL_ROOT_USER" "-p$MYSQL_ROOT_PASSWORD" <<-EOSQL &
+  GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO '$MYSQL_USER_MONITORING'@'$HOST' IDENTIFIED BY '$MYSQL_USER_PASSWORD_MONITORING' WITH MAX_USER_CONNECTIONS 3;
+	FLUSH PRIVILEGES;
+EOSQL
+
+sudo bash -c 'cat << EOF > /etc/.mysql_exporter.cnf
+[client]
+user=exporter
+password=e@p0rt3r
+EOF'
+
+sudo bash -c 'cat << EOF > /etc/systemd/system/mysql_exporter.service
+[Unit]
+Description=MySQL Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=mysqlexporter
+ExecStart=/usr/local/bin/mysqld_exporter \
+--config.my-cnf /etc/.mysql_exporter.cnf
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+
+sudo systemctl daemon-reload
+sudo systemctl enable mysql_exporter.service
+sudo systemctl start mysql_exporter.service

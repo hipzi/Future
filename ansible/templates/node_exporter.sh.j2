@@ -1,0 +1,30 @@
+#!/bin/sh
+
+node_version={{ version.node }}
+
+sudo useradd -r -s /bin/false nodeuser 
+yum -y update 
+yum -y install curl 
+curl -LO https://github.com/prometheus/node_exporter/releases/download/v${node_version}/node_exporter-${node_version}.linux-amd64.tar.gz 
+tar -xvzf node_exporter-${node_version}.linux-amd64.tar.gz 
+cp node_exporter-${node_version}.linux-amd64/node_exporter /usr/local/bin/ 
+rm -rf node_exporter-${node_version}.linux-amd64* 
+sudo chown nodeuser:nodeuser /usr/local/bin/node_exporter 
+
+sudo bash -c 'cat << EOF > /etc/systemd/system/node_exporter.service
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=nodeuser
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=default.target
+EOF'
+
+sudo systemctl daemon-reload
+sudo systemctl enable node_exporter.service
+sudo systemctl start node_exporter.service

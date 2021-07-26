@@ -1,0 +1,21 @@
+- name: Transfer and execute a docker compose prometheus
+  hosts: haproxy
+  remote_user: hipzi
+  become: yes
+
+  tasks:
+
+    - name: Creates directory
+      file:
+        path: /home/hipzi/prometheus
+        state: directory
+
+    - name: Transfer directory prometheus
+      copy: 
+        src: /home/hipzi/docker/prometheus/
+        dest: /home/hipzi/prometheus/
+
+    - name: Execute the docker compose prometheus
+      shell:
+        chdir: /home/hipzi/prometheus/
+        cmd: docker-compose up -d --force-recreate  

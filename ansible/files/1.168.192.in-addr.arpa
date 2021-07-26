@@ -1,0 +1,11 @@
+@   IN  SOA     future05.hipzi. root.future05.hipzi. (
+                1001    ;Serial
+                3H      ;Refresh
+                15M     ;Retry
+                1W      ;Expire
+                1D      ;Minimum TTL
+                )
+
+;Name Server and PTR Information
+1.168.192.in-addr.arpa.     IN  NS        future05.hipzi.
+22                          IN  PTR       future05.hipzi.
