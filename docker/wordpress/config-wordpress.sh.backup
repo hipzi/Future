@@ -1,0 +1,21 @@
+#!/bin/sh
+
+MariaDB_DATABASE=wordpress
+MariaDB_USER=wordpressuser
+MariaDB_USER_PASSWORD=w0rd^Ress1!
+MariaDB_HOST=192.168.1.10
+
+awk '
+	/put your unique phrase here/ {
+		cmd = "head -c1m /dev/urandom | sha1sum | cut -d\\  -f1"
+		cmd | getline str
+		close(cmd)
+		gsub("put your unique phrase here", str)
+	}
+	{ print }
+' /var/www/wordpress/wp-config-sample.php > /var/www/wordpress/wp-config.php
+
+sed -i 's/database_name_here/${MariaDB_DATABASE}/g' /var/www/wordpress/wp-config.php
+sed -i 's/username_here/${MariaDB_USER}/g' /var/www/wordpress/wp-config.php
+sed -i 's/password_here/${MariaDB_USER_PASSWORD}/g' /var/www/wordpress/wp-config.php
+sed -i 's/localhost/${MariaDB_HOST}/g' /var/www/wordpress/wp-config.php

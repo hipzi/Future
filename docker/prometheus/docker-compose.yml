@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  prometheus:
+    build: .
+    container_name: prometheus_container
+    hostname: "prometheus"
+    ports:
+      - "9090:9090"
+    volumes:
+      - /home/hipzi/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro

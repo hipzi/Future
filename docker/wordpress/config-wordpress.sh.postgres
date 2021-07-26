@@ -1,0 +1,25 @@
+#!/bin/sh
+
+POSTGRES_USER=wordpressuser
+POSTGRES_PASSWORD=w0rd^Ress1!
+POSTGRES_DB=wordpress
+POSTGRES_HOST=192.168.1.20
+
+awk '
+	/put your unique phrase here/ {
+		cmd = "head -c1m /dev/urandom | sha1sum | cut -d\\  -f1"
+		cmd | getline str
+		close(cmd)
+		gsub("put your unique phrase here", str)
+	}
+	{ print }
+' /var/www/wordpress/wp-config-sample.php > /var/www/wordpress/wp-config.php
+
+sed -i "s/database_name_here/${POSTGRES_DB}/g" /var/www/wordpress/wp-config.php
+sed -i "s/username_here/${POSTGRES_USER}/g" /var/www/wordpress/wp-config.php
+sed -i "s/password_here/${POSTGRES_PASSWORD}/g" /var/www/wordpress/wp-config.php
+sed -i "s/localhost/${POSTGRES_HOST}/g" /var/www/wordpress/wp-config.php
+
+sed -i "s#wp-content/pg4wp#wp-content/plugins/wppg/pg4wp#g" /var/www/wordpress/wp-content/db.php
+
+exec "$@"

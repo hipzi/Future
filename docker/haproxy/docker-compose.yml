@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  haproxy:
+    build: .
+    container_name: haproxy_container
+    hostname: "haproxy"
+    ports:
+      - "80:80"
+      - "8404:8404"
+    volumes:
+      - /home/hipzi/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
