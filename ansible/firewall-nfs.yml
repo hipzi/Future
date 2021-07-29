@@ -1,0 +1,25 @@
+- name: Transfer and execute a script firewall for nfs server
+  hosts: nfsserver
+  remote_user: hipzi
+  become: yes
+
+  tasks:
+
+    - name: Stop and disable firewalld
+      service:
+        name: firewalld
+        state: stopped
+        enabled: False
+
+    - name: Creates directory
+      file:
+        path: /home/hipzi/firewall
+        state: directory
+
+    - name: Transfer the script firewall 
+      copy: 
+        src: /home/hipzi/firewall/firewall-nfs.sh
+        dest: /home/hipzi/firewall/firewall-nfs.sh
+
+    - name: Execute the script firewall
+      command: bash /home/hipzi/firewall/firewall-nfs.sh
