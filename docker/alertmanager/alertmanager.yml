@@ -1,0 +1,16 @@
+global:
+  resolve_timeout: 1m
+
+route:
+  receiver: 'gmail-notifications'
+
+receivers:
+- name: 'gmail-notifications'
+  email_configs:
+  - to: infrainfra01@gmail.com
+    from: infrainfra01@gmail.com
+    smarthost: smtp.gmail.com:587
+    auth_username: infrainfra01@gmail.com
+    auth_identity: infrainfra01@gmail.com
+    auth_password: rbytbhavlokxkqhg
+    send_resolved: true

@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  alertmanager:
+    build: .
+    container_name: alertmanager_container
+    hostname: "alertmanager"
+    ports:
+      - "9093:9093"
+    volumes:
+      - /home/hipzi/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml

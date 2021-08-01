@@ -9,5 +9,6 @@ services:
       - "9090:9090"
     volumes:
       - /home/hipzi/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /home/hipzi/prometheus/rules.yml:/etc/prometheus/rules.yml
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
