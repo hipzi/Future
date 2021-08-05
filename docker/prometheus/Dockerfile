@@ -19,8 +19,11 @@ RUN adduser -s /bin/false -D -H prometheus \
     && chown -R prometheus:prometheus /etc/prometheus \
     && chown prometheus:prometheus /var/lib/prometheus 
 
-COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 9090 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+ENTRYPOINT /usr/local/bin/prometheus \
+	   --config.file /etc/prometheus/prometheus.yml \
+	   --storage.tsdb.path /var/lib/prometheus/ \
+	   --web.console.libraries=/usr/share/prometheus/console_libraries \
+	   --web.console.templates=/usr/share/prometheus/consoles
 
 

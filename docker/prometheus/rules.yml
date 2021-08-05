@@ -3,7 +3,7 @@ groups:
   rules:
   - alert: Wordpress Down
     # Condition for alerting
-    expr: haproxy_server_status{proxy=~"wordpress",server=~"(wordpress1|wordpress2)"}
+    expr: haproxy_server_status{proxy=~"wordpress",server=~"(wordpress1|wordpress2)"} == 0
     for: 1m
     # Annotation - additional informational labels to store more information
     annotations:
@@ -12,3 +12,5 @@ groups:
     # Labels - additional labels to be attached to the alert
     labels:
       severity: 'critical'
+
+
