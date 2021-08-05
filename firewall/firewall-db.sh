@@ -20,9 +20,6 @@ iptables -A INPUT -s 192.168.1.18 -j ACCEPT
 # allow mysql-exporter
 iptables -A INPUT -p tcp --dport 9104 -j ACCEPT
 
-# allow localhost
-iptables -A INPUT -s 127.0.0.1 -j ACCEPT
-
 # allow node-exporter
 iptables -A INPUT -p tcp --dport 9100 -j ACCEPT
 

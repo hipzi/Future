@@ -11,6 +11,16 @@
         state: stopped
         enabled: False
 
+    - name: install iptables
+      yum:
+        name: iptables-services
+
+    - name: Start iptables and enable it
+      service:
+        name: iptables
+        state: started
+        enabled: yes
+
     - name: Creates directory
       file:
         path: /home/hipzi/firewall
@@ -22,4 +32,15 @@
         dest: /home/hipzi/firewall/firewall-wordpress.sh
 
     - name: Execute the script firewall
-      command: bash /home/hipzi/firewall/firewall-wordpress.sh
+      shell: bash /home/hipzi/firewall/firewall-wordpress.sh
+
+    - name: Save rules iptables
+      shell: iptables-save > /etc/sysconfig/iptables
+      notify: Restart iptables
+
+  handlers:
+
+    - name: Restart iptables
+      service:
+        name: iptables
+        state: restarted
