@@ -25,6 +25,7 @@ iptables -A INPUT -p tcp --dport 587 -j ACCEPT
 
 # allow haproxy statistic 
 iptables -A INPUT -p tcp --dport 8404 -j ACCEPT
+iptables -A INPUT -p tcp --sport 8404 -j ACCEPT
 
 # allow node-exporter
 iptables -A INPUT -p tcp --sport 9100 -j ACCEPT
