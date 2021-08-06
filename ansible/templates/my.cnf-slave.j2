@@ -8,11 +8,12 @@ symbolic-links=0
 # customize your systemd unit file for mariadb according to the
 # instructions in http://fedoraproject.org/wiki/Systemd
 
-server-id       = {{server_id.slave}}
-bind-address    = {{bind_address}}
-log_bin         = {{log_bin}}
-binlog_do_db    = {{binlog_do_db}}
-relay-log       = {{relay_log}}
+server-id        = {{server_id.slave}}
+bind-address     = {{bind_address}}
+log_bin          = {{log_bin}}
+binlog_do_db     = {{binlog_do_db}}
+relay-log        = {{relay_log}}
+query_cache_size = {{query_cache_size}}
 
 [mysqld_safe]
 log-error=/var/log/mariadb/mariadb.log

@@ -5,6 +5,7 @@ bind_address: 0.0.0.0
 log_bin: mysql-bin
 binlog_do_db: wordpress
 relay_log: mysql-relay-bin
+query_cache_size: 1000000
 mysqluser: 
   root: root
   user: wordpressuser
