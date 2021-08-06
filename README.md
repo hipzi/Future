@@ -1,8 +1,10 @@
 # Future
 
+    
     ├── ansible
     │   ├── ansible.cfg
     │   ├── dns.yml
+    │   ├── docker-alertmanager.yml
     │   ├── docker-compose.yml
     │   ├── docker-grafana.yml
     │   ├── docker-haproxy.yml
@@ -16,7 +18,7 @@
     │   │   └── named.conf
     │   ├── firewall-ansible.yml
     │   ├── firewall-db.yml
-    │   ├── firewall-haproxy-monitoring.sh
+    │   ├── firewall-haproxy-monitoring.yml
     │   ├── firewall-nfs.yml
     │   ├── firewall-wordpress.yml
     │   ├── hosts
@@ -38,6 +40,10 @@
     │       ├── monitoring.yml
     │       └── mysql.yml
     ├── docker
+    │   ├── alertmanager
+    │   │   ├── alertmanager.yml
+    │   │   ├── docker-compose.yml
+    │   │   └── Dockerfile
     │   ├── grafana
     │   │   ├── docker-compose.yml
     │   │   └── Dockerfile
@@ -54,6 +60,7 @@
     │   │   ├── docker-compose.yml
     │   │   ├── Dockerfile
     │   │   ├── prometheus.yml
+    │   │   ├── rules.yml
     │   │   └── supervisord.conf
     │   └── wordpress
     │       ├── config-php.sh
@@ -71,4 +78,6 @@
     │   ├── firewall-wordpress.sh
     │   └── jail.local
     ├── kickstart
-        └── ks.cfg
+    │   └── ks.cfg
+    └── README.md
+
