@@ -1,20 +1,37 @@
 global:
-  scrape_interval: 10s
+  # How frequently to scrape targets
+  scrape_interval:     10s
+  # How frequently to evaluate rules
+  evaluation_interval: 10s
 
+# Rules and alerts are read from the specified file(s)
+rule_files:
+ - rules.yml
+
+# Alerting specifies settings related to the Alertmanager
+alerting:
+ alertmanagers:
+   - static_configs:
+     - targets:
+       # Alertmanager's default port is 9093
+       - 192.168.1.23:9093
+
+# A list of scrape configurations that specifies a set of
+# targets and parameters describing how to scrape them.
 scrape_configs:
   - job_name: 'prometheus_master'
-    scrape_interval: 5s
+    scrape_interval: 10s
     static_configs:
       - targets: ['localhost:9090']
   - job_name: 'node_exporter_centos'
-    scrape_interval: 5s
+    scrape_interval: 10s
     static_configs:
       - targets: ['192.168.1.13:9100','192.168.1.15:9100','192.168.1.16:9100','192.168.1.17:9100','192.168.1.18:9100','192.168.1.19:9100','192.168.1.23:9100']
   - job_name: 'haproxy'
-    scrape_interval: 5s
+    scrape_interval: 10s
     static_configs:
       - targets: ['192.168.1.23:8404']
   - job_name: 'mysql'
-    scrape_interval: 5s
+    scrape_interval: 10s
     static_configs:
       - targets: ['192.168.1.17:9104','192.168.1.18:9104']
