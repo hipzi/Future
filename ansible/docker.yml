@@ -1,5 +1,5 @@
 - name: Install Docker
-  hosts: haproxy
+  hosts: wordpress
   remote_user: hipzi
   become: yes
 
@@ -8,27 +8,12 @@
     yum:
       name: yum-utils
       state: latest
-      lock_timeout: 110
 
   - name: Add docker repo
     get_url:
       url: https://download.docker.com/linux/centos/docker-ce.repo
       dest: /etc/yum.repos.d/docker-ce.repo
     
-  - name: Enable docker nightly repo
-    ini_file:
-      dest: /etc/yum.repos.d/docker-ce.repo
-      section: 'docker-ce-nightly'
-      option: enabled
-      value: 0
-    
-  - name: Enable docker test repo
-    ini_file:
-      dest: /etc/yum.repos.d/docker-ce.repo
-      section: 'docker-ce-test'
-      option: enabled
-      value: 0
-
   - name: Install Docker
     package:
       name: docker-ce
@@ -40,4 +25,10 @@
       state: started
       enabled: yes
 
-   
+  - name: Add user to group docker
+    user:    
+      name: hipzi
+      groups: docker
+      append: yes
+
+
