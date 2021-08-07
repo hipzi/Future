@@ -48,3 +48,24 @@
       shell:
         chdir: /home/hipzi/wordpress/
         cmd: docker-compose up -d --force-recreate 
+
+- name: Run Wordpress Installation
+  hosts: wordpress[0]
+  remote_user: hipzi
+  become: yes
+
+  tasks:
+
+    - name: Wordpress Installation
+      uri:
+        url: http://{{ inventory_hostname }}/wp-admin/install.php?step=2
+        method: POST
+        body_format: form-urlencoded
+        body:
+          weblog_title: Bismillah
+          user_name: admin
+          admin_password: admin
+          admin_password2: admin
+          admin_email: admin@example.com
+        timeout: 60
+
