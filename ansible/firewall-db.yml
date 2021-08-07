@@ -1,47 +1,43 @@
-- name: Transfer and execute a script firewall for database server
+- name: Add rules firewall for database server
   hosts: dbservers
   remote_user: hipzi
   become: yes
 
   tasks:
 
-    - name: Stop and disable firewalld
+    - name: Start firewalld and enable it
       service:
         name: firewalld
-        state: stopped
-        enabled: False
-
-    - name: install iptables
-      yum:
-        name: iptables-services
-
-    - name: Start iptables and enable it
-      service:
-        name: iptables
         state: started
         enabled: yes
 
-    - name: Creates directory
-      file:
-        path: /home/hipzi/firewall
-        state: directory
+    - name: Add port (ssh, node exporter, mysql exporter) to firewalld
+      firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: enabled
+      loop:
+        - 22/tcp
+        - 9100/tcp
+        - 9104/tcp
+      notify: Reload firewalld
 
-    - name: Transfer the script firewall 
-      copy: 
-        src: /home/hipzi/firewall/firewall-db.sh
-        dest: /home/hipzi/firewall/firewall-db.sh
-
-    - name: Execute the script firewall
-      command: bash /home/hipzi/firewall/firewall-db.sh
-
-    - name: Save rules iptables
-      shell: iptables-save > /etc/sysconfig/iptables
-      notify: Restart iptables
+    - name: Allow connection from wordpress and database server
+      firewalld:
+        source: "{{ item }}"
+        permanent: yes
+        state: enabled
+      loop:
+        - 192.168.1.15
+        - 192.168.1.16
+        - 192.168.1.17
+        - 192.168.1.18
+      notify: Reload firewalld      
 
   handlers:
 
-    - name: Restart iptables
+    - name: Reload firewalld
       service:
-        name: iptables
-        state: restarted
+        name: firewalld
+        state: reloaded
 
