@@ -7,3 +7,7 @@ services:
     hostname: "grafana"
     ports:
       - "3000:3000"
+    volumes:
+      - /home/hipzi/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - /home/hipzi/grafana/datasources:/etc/grafana/provisioning/datasources
+      - /home/hipzi/grafana/dashboards:/etc/grafana/provisioning/dashboards
