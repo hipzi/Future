@@ -40,7 +40,7 @@
 
 - name: Copy exports file
   template:
-    src: ./templates/exports.j2
+    src: templates/exports.j2
     dest: /etc/exports
 
 - name: NFS apply change configure
