@@ -1,0 +1,7 @@
+server_id: 
+  master: 1
+bind_address: 0.0.0.0
+log_bin: mysql-bin
+binlog_do_db: wordpress
+query_cache_size: 1000000
+

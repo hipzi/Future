@@ -1,0 +1,5 @@
+- name: Config MySQL Server Master
+  template:
+    src: templates/my.cnf.j2
+    dest: /etc/my.cnf
+  notify: Restart Mariadb

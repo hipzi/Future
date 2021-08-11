@@ -1,0 +1,24 @@
+- name: Creates directory
+  file:
+    path: /home/hipzi/haproxy
+    state: directory
+
+- name: Transfer directory haproxy
+  copy: 
+    src: /home/hipzi/docker/haproxy/
+    dest: /home/hipzi/haproxy/
+
+- name: Execute the docker compose haproxy
+  shell:
+    chdir: /home/hipzi/haproxy/
+    cmd: docker-compose up -d --force-recreate 
+
+- name: Open port haproxy, haproxy stats to firewalld
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - 80/tcp
+    - 8404/tcp
+  notify: Reload firewalld

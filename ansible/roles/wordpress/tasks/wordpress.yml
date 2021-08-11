@@ -1,0 +1,29 @@
+- name: Transfer directory wordpress
+  copy: 
+    src: /home/hipzi/docker/wordpress/
+    dest: /home/hipzi/wordpress/
+
+- name: Transfer directory nginx
+  copy:
+    src: /home/hipzi/docker/nginx/
+    dest: /home/hipzi/nginx/
+
+- name: Execute the script config php
+  command: bash /home/hipzi/wordpress/config-php.sh
+
+- name: Create a mountable directory 
+  file:
+    path: /home/hipzi/wordpress/wp-content
+    state: directory
+
+- name: Execute the docker compose wordpress
+  shell:
+    chdir: /home/hipzi/wordpress/
+    cmd: docker-compose up -d --force-recreate 
+
+- name: Open port webserver to firewalld
+  firewalld:
+    port: 80/tcp
+    permanent: yes
+    state: enabled
+  notify: Reload firewalld

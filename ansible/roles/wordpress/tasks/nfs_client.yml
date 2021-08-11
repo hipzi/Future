@@ -1,0 +1,32 @@
+- name: install nfs-utils
+  yum:
+    name: nfs-utils
+    state: latest
+
+- name: Creates directory wordpress
+  file:
+    path: /home/hipzi/wordpress
+    state: directory
+
+- name: Create a mountable directory if it does not exist
+  file:
+    path: /home/hipzi/wordpress/wp-content
+    state: directory
+
+- name: Mount an NFS volume
+  ansible.posix.mount:
+    src: 192.168.1.19:/home/hipzi/wp-content
+    path: /home/hipzi/wordpress/wp-content
+    opts: rw,sync,hard,intr
+    state: mounted
+    fstype: nfs
+
+- name: Open port nfs and rpcbind to firewalld
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - 2049/tcp
+    - 111/tcp
+  notify: Reload firewalld

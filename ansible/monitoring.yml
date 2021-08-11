@@ -1,0 +1,8 @@
+- name: Install and Configure monitoring server
+  hosts: haproxy_monitoring
+  become: yes
+  
+  roles:
+    - prometheus
+    - alertmanager    
+    - grafana

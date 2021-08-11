@@ -1,0 +1,23 @@
+- name: Install and Configure MariaDB
+  hosts: dbservers
+  remote_user: hipzi
+  become: yes
+
+  roles:
+    - mariadb
+
+- name: Configure MariaDB Master
+  hosts: db_master
+  remote_user: hipzi
+  become: yes
+
+  roles:
+    - mariadb_master
+
+- name: Configure MariaDB Slave
+  hosts: db_slave
+  remote_user: hipzi
+  become: yes
+
+  roles:
+    - mariadb_slave

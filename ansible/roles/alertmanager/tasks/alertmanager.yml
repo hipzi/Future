@@ -1,0 +1,24 @@
+- name: Creates directory
+  file:
+    path: /home/hipzi/alertmanager
+    state: directory
+
+- name: Transfer directory alertmanager
+  copy: 
+    src: /home/hipzi/docker/alertmanager/
+    dest: /home/hipzi/alertmanager/
+
+- name: Execute the docker compose alertmanager
+  shell:
+    chdir: /home/hipzi/alertmanager/
+    cmd: docker-compose up -d --force-recreate  
+
+- name: Add port alertmanager and smtp to firewalld
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - 9093/tcp
+    - 587/tcp
+  notify: Reload firewalld

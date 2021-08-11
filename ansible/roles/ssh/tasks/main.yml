@@ -1,0 +1,2 @@
+- name: Distribute ssh public key
+  import_tasks: ssh.yml

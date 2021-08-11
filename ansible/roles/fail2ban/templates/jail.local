@@ -1,0 +1,13 @@
+[DEFAULT]
+# Ban hosts for one hour:
+bantime = {{bantime}}
+
+# maxretry variable sets the number of tries a client has to authenticate withi a window of time defined by findtime
+findtime = {{findtime}}
+maxretry = {{maxretry}}
+
+# Override /etc/fail2ban/jail.d/00-firewalld.conf:
+banaction = iptables-multiport
+
+[sshd]
+enabled = true

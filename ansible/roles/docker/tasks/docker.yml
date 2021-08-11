@@ -1,0 +1,26 @@
+- name: Install yum utils
+  yum:
+    name: yum-utils
+    state: latest
+
+- name: Add docker repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+  
+- name: Install Docker
+  package:
+    name: docker-ce
+    state: latest
+
+- name: Start docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add user to group docker
+  user:    
+    name: hipzi
+    groups: docker
+    append: yes

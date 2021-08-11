@@ -1,0 +1,2 @@
+- name: Run wordpress installation
+  import_tasks: wordpress_installation.yml

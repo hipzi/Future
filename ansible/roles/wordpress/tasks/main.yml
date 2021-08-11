@@ -1,0 +1,5 @@
+- name: Install and Configure NFS Client
+  import_tasks: nfs_client.yml
+
+- name: Transfer and execute a docker compose wordpress
+  import_tasks: wordpress.yml

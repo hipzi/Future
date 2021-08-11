@@ -1,0 +1,6 @@
+- name: Install and Configure NFS
+  hosts: nfsserver
+  become: yes
+  
+  roles:
+    - nfs

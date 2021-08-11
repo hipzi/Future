@@ -1,0 +1,2 @@
+- name: Transfer and execute a docker compose grafana
+  import_tasks: grafana.yml

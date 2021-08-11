@@ -1,0 +1,13 @@
+server_id: 
+  slave: 2
+bind_address: 0.0.0.0
+log_bin: mysql-bin
+binlog_do_db: wordpress
+relay_log: mysql-relay-bin
+query_cache_size: 1000000
+mysqluser: 
+  root: root
+  replica: userreplika
+mysqlpass:
+  root: r00tw0rd^Ress1!
+  replica: r3pl-kaP4ss

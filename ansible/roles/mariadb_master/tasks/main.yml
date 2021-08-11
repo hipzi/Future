@@ -1,0 +1,2 @@
+- name: Config my.cnf for mariadb master
+  import_tasks: mariadb_master.yml

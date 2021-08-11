@@ -1,0 +1,8 @@
+- name: Install MariaDB and Run MariaDB Secure Installation
+  import_tasks: mariadb.yml
+
+- name: Transfer and execute script create user and database
+  import_tasks: mariadb_user_db.yml
+
+- name: Transfer and execute script exporter
+  import_tasks: mariadb_exporter.yml

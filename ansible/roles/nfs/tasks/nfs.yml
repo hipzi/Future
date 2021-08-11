@@ -1,0 +1,57 @@
+- name: install nfs-utils
+  yum: 
+    name: nfs-utils 
+    state: latest
+
+- name: NFS apply change configure
+  shell: systemctl start nfs
+
+- name: Create a mountable directory 
+  file:
+    path: /home/hipzi/wp-content
+    state: directory
+
+- name: Download wordpress
+  get_url:
+    url: https://wordpress.org/wordpress-5.7.tar.gz
+    dest: /home/hipzi/
+
+- name: Extract wordpress
+  ansible.builtin.unarchive:
+    src: /home/hipzi/wordpress-5.7.tar.gz
+    dest: /home/hipzi/
+    remote_src: yes
+
+- name: Copy folder wp-content 
+  copy:
+    src: /home/hipzi/wordpress/wp-content
+    dest: /home/hipzi/
+    remote_src: yes
+
+- name: Remove wordpress
+  file:
+    path: /home/hipzi/wordpress
+    state: absent
+
+- name: Remove wordpress.tar.gz
+  file:
+    path: /home/hipzi/wordpress-5.7.tar.gz
+    state: absent
+
+- name: Copy exports file
+  template:
+    src: ./templates/exports.j2
+    dest: /etc/exports
+
+- name: NFS apply change configure
+  shell: systemctl reload nfs;exportfs -rav
+
+- name: Open port nfs and rpcbind to firewalld
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - 2049/tcp
+    - 111/tcp
+  notify: Reload firewalld

@@ -1,0 +1,19 @@
+- name: Creates directory
+  file:
+    path: /home/hipzi/node_exporter
+    state: directory
+
+- name: Transfer the script node exporter
+  template: 
+    src: templates/node_exporter.sh.j2
+    dest: /home/hipzi/node_exporter/node_exporter.sh
+
+- name: Execute the script node exporter
+  command: bash /home/hipzi/node_exporter/node_exporter.sh
+
+- name: Open port node exporter to firewalld
+  firewalld:
+    port: 9100/tcp
+    permanent: yes
+    state: enabled
+  notify: Reload firewalld

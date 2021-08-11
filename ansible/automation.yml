@@ -1,0 +1,26 @@
+- name: Automation
+  hosts: all
+
+- name: SSH
+  import_playbook: ssh.yml
+
+- name: Docker
+  import_playbook: docker.yml
+
+- name: HAproxy
+  import_playbook: haproxy.yml
+
+- name: Wordpress
+  import_playbook: wordpress.yml
+
+- name: MariaDB
+  import_playbook: mariadb.yml
+
+- name: Node Exporter
+  import_playbook: node_exporter.yml  
+
+- name: Monitoring
+  import_playbook: monitoring.yml  
+
+- name: Fail2Ban
+  import_playbook: fail2ban.yml   

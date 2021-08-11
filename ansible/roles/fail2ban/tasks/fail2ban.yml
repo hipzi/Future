@@ -1,0 +1,16 @@
+- name: Install Fail2Ban
+  yum: 
+    name: fail2ban 
+    state: present
+
+- name: Start Fail2Ban and enable it
+  service: 
+    name: fail2ban
+    state: started 
+    enabled: yes
+
+- name: Transfer the config file2ban
+  template:
+    src: templates/jail.local
+    dest: /etc/fail2ban/jail.local
+  notify: Restart Fail2Ban

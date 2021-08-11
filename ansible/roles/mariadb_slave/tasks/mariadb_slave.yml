@@ -1,0 +1,13 @@
+- name: Config MySQL Server Slave
+  template:
+    src: templates/my.cnf-slave.j2
+    dest: /etc/my.cnf
+  notify: Restart Mariadb
+
+- name: Transfer the script mysql-master-slave
+  template:
+    src: templates/mysql-master-slave.sh.j2
+    dest: /home/hipzi/scripts/mysql-master-slave.sh
+
+- name: Execute the script mysql-master-slave
+  command: bash /home/hipzi/scripts/mysql-master-slave.sh

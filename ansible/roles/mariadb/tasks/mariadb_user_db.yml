@@ -1,0 +1,24 @@
+- name: Creates directory
+  file:
+    path: /home/hipzi/scripts
+    state: directory
+
+- name: Transfer the script mysql
+  template: 
+    src: templates/mysql-user-db.sh.j2
+    dest: /home/hipzi/scripts/mysql-user-db.sh
+
+- name: Execute the script mysql
+  command: bash /home/hipzi/scripts/mysql-user-db.sh
+
+- name: Allow connection from wordpress and database server
+  firewalld:
+    source: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - 192.168.1.15
+    - 192.168.1.16
+    - 192.168.1.17
+    - 192.168.1.18
+  notify: Reload firewalld  

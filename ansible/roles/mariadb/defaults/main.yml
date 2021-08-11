@@ -1,0 +1,11 @@
+version:
+  mysql_exporter: 0.13.0
+mysqluser: 
+  root: root
+  user: wordpressuser
+  monitoring: exporter  
+mysqlpass:
+  root: r00tw0rd^Ress1!
+  user: w0rd^Ress1!
+  monitoring: e@p0rt3r
+database: wordpress

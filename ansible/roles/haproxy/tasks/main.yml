@@ -1,0 +1,2 @@
+- name: Transfer and execute a docker compose haproxy
+  import_tasks: haproxy.yml

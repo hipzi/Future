@@ -3,28 +3,5 @@
   remote_user: hipzi
   become: yes
 
-  tasks:
-
-    - name: Install Fail2Ban
-      yum: 
-        name: fail2ban 
-        state: present
-
-    - name: Start Fail2Ban and enable it
-      service: 
-        name: fail2ban
-        state: started 
-        enabled: yes
-
-    - name: Transfer the config file2ban
-      copy:
-        src: /home/hipzi/firewall/jail.local
-        dest: /etc/fail2ban/jail.local
-      notify: Restart Fail2Ban
-
-  handlers:
-
-    - name: Restart Fail2Ban
-      service:
-        name: fail2ban
-        state: restarted
+  roles:
+    - fail2ban

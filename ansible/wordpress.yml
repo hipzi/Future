@@ -1,0 +1,15 @@
+- name: Configure wordpress
+  hosts: wordpress
+  remote_user: hipzi
+  become: yes
+
+  roles:
+    - wordpress
+
+- name: Run Wordpress Installation
+  hosts: wordpress[0]
+  remote_user: hipzi
+  become: yes
+
+  roles:
+    - wordpress_installation

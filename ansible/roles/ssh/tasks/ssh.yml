@@ -1,0 +1,20 @@
+- name: distribute ssh public key to remote servers
+  ansible.posix.authorized_key:
+    user: hipzi
+    state: present
+    key: "{{ lookup('file', '/home/hipzi/.ssh/id_rsa.pub') }}"
+
+- name: set passwordless sudo
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s' 
+
+- name: Open port ssh to firewalld
+  firewalld:
+    port: 22/tcp
+    permanent: yes
+    state: enabled
+  notify: Reload firewalld    
