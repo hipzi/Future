@@ -32,6 +32,18 @@
           "{{.Name}}",
           "--bridgeadapter2",
           "wlo1"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--nic3",
+          "bridged"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--bridgeadapter3",
+          "wlo1"
         ]
       ],
       "vm_name": "{{ user `vm_name` }}",

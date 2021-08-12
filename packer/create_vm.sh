@@ -1,8 +1,12 @@
 #!/bin/bash
 
 vmName=("ansiblecontroller" "haproxy-monitoring" "wordpress-1" "wordpress-2" "nfs" "mariadb-master" "mariadb-slave")
+ip=("192.168.1.10" "192.168.1.11" "192.168.1.12" "192.168.1.13" "192.168.1.14" "192.168.1.15" "192.168.1.16")
+i=0
 
 for value in "${vmName[@]}"
 do 
+    sed -i "s/ip=${ip[i-1]}/ip=${ip[i]}/g" ~/packer/kickstart/ks.cfg
     packer build -var "vm_name=$value" -var "output_directory=$value" centos7.json 
+    ((i=i+1))
 done
