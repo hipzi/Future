@@ -13,11 +13,11 @@
 - name: NFS
   import_playbook: nfs_server.yml
 
-- name: Wordpress
-  import_playbook: wordpress.yml
-
 - name: MariaDB
   import_playbook: mariadb.yml
+    
+- name: Wordpress
+  import_playbook: wordpress.yml
 
 - name: Node Exporter
   import_playbook: node_exporter.yml  
