@@ -7,9 +7,6 @@
 - name: Docker
   import_playbook: docker.yml
 
-- name: HAproxy
-  import_playbook: haproxy.yml
-
 - name: NFS
   import_playbook: nfs_server.yml
 
@@ -19,6 +16,9 @@
 - name: Wordpress
   import_playbook: wordpress.yml
 
+- name: HAproxy
+  import_playbook: haproxy.yml
+  
 - name: Node Exporter
   import_playbook: node_exporter.yml  
 
