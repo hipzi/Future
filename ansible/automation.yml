@@ -10,6 +10,9 @@
 - name: HAproxy
   import_playbook: haproxy.yml
 
+- name: NFS
+  import_playbook: nfs_server.yml
+
 - name: Wordpress
   import_playbook: wordpress.yml
 
