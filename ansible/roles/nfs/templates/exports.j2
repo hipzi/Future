@@ -1,3 +1,4 @@
 # /etc/exports: the access control list for filesystems which may be exported
 #   to NFS clients.  See exports(5).
-/home/hipzi/wp-content            *(rw,sync,no_root_squash,no_subtree_check)
+{{ path_file_shared }}           192.168.1.12(rw,sync,no_root_squash,no_subtree_check)
+{{ path_file_shared }}           192.168.1.13(rw,sync,no_root_squash,no_subtree_check)

@@ -1,24 +1,24 @@
 localhost
 
 [nfsserver]
-192.168.1.19
+192.168.1.14
 
 [db_master]
-192.168.1.17
+192.168.1.15
 
 [db_slave]
-192.168.1.18
+192.168.1.16
 
 [dbservers:children]
 db_master
 db_slave
 
 [wordpress]
-192.168.1.15
-192.168.1.16
+192.168.1.12
+192.168.1.13
 
 [haproxy_monitoring]
-192.168.1.23
+192.168.1.11
 
 [docker:children]
 wordpress

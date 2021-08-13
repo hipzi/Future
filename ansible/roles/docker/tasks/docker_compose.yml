@@ -16,4 +16,7 @@
     mode: 0755
   
 - name: link docker compose
-  command: ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose   
+  file: 
+    src: /usr/local/bin/docker-compose
+    dest: /usr/bin/docker-compose
+    state: link

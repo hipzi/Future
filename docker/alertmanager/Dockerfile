@@ -17,6 +17,6 @@ RUN adduser -s /bin/false -D -H alertmanager \
 
 ENTRYPOINT /usr/local/bin/alertmanager \ 
             --config.file /etc/alertmanager/alertmanager.yml \ 
-            --web.external-url http://192.168.1.23:9093
+            --web.external-url http://192.168.1.11:9093
 
 EXPOSE 9093

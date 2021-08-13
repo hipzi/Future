@@ -3,7 +3,7 @@
 MYSQL_DATABASE=wordpress
 MYSQL_USER=wordpressuser
 MYSQL_USER_PASSWORD=w0rd^Ress1!
-MYSQL_HOST=192.168.1.17
+MYSQL_HOST=192.168.1.15
 
 awk '
 	/put your unique phrase here/ {

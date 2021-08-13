@@ -14,7 +14,7 @@ alerting:
    - static_configs:
      - targets:
        # Alertmanager's default port is 9093
-       - 192.168.1.23:9093
+       - 192.168.1.11:9093
 
 # A list of scrape configurations that specifies a set of
 # targets and parameters describing how to scrape them.

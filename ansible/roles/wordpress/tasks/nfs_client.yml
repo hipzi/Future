@@ -15,7 +15,7 @@
 
 - name: Mount an NFS volume
   ansible.posix.mount:
-    src: 192.168.1.19:/home/hipzi/wp-content
+    src: 192.168.1.14:/home/hipzi/wp-content
     path: /home/hipzi/wordpress/wp-content
     opts: rw,sync,hard,intr
     state: mounted
