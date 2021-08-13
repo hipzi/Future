@@ -5,7 +5,7 @@
 
 - name: Transfer directory haproxy
   copy: 
-    src: /home/hipzi/docker/haproxy/
+    src: /home/hipzi/Future/docker/haproxy/
     dest: /home/hipzi/haproxy/
 
 - name: Execute the docker compose haproxy

@@ -5,7 +5,7 @@
 
 - name: Transfer directory alertmanager
   copy: 
-    src: /home/hipzi/docker/alertmanager/
+    src: /home/hipzi/Future/docker/alertmanager/
     dest: /home/hipzi/alertmanager/
 
 - name: Execute the docker compose alertmanager

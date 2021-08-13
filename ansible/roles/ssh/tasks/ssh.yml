@@ -1,5 +1,5 @@
 - name: distribute ssh public key to remote servers
-  ansible.posix.authorized_key:
+  authorized_key:
     user: hipzi
     state: present
     key: "{{ lookup('file', '/home/hipzi/.ssh/id_rsa.pub') }}"

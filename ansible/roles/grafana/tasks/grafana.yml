@@ -5,7 +5,7 @@
 
 - name: Transfer directory grafana
   copy: 
-    src: /home/hipzi/docker/grafana/
+    src: /home/hipzi/Future/docker/grafana/
     dest: /home/hipzi/grafana/
 
 - name: Execute the docker compose grafana

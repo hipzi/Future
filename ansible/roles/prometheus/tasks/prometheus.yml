@@ -5,7 +5,7 @@
 
 - name: Transfer directory prometheus
   copy: 
-    src: /home/hipzi/docker/prometheus/
+    src: /home/hipzi/Future/docker/prometheus/
     dest: /home/hipzi/prometheus/
 
 - name: Execute the docker compose prometheus
