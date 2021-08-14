@@ -11,6 +11,12 @@
 - name: Execute the script mysql
   command: bash /home/hipzi/scripts/mysql-user-db.sh
 
+- name: Add new zone in firewall
+  firewalld:
+    zone: mariadb-access
+    state: present
+    permanent: true
+
 - name: Allow connection from wordpress and database server
   firewalld:
     source: "{{ item }}"
