@@ -14,6 +14,7 @@
 - name: Allow connection from wordpress and database server
   firewalld:
     source: "{{ item }}"
+    zone: mariadb-access
     permanent: yes
     state: enabled
   loop:
@@ -22,3 +23,11 @@
     - 192.168.1.15
     - 192.168.1.16
   notify: Reload firewalld  
+
+- name: Open port database to firewalld
+  firewalld:
+    port: 3306/tcp
+    zone: mariadb-access
+    permanent: yes
+    state: enabled
+  notify: Reload firewalld
