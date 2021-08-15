@@ -16,13 +16,16 @@ RUN adduser -s /bin/false -D -H grafana \
     && mkdir -p /etc/grafana/provisioning/datasources \
     && mkdir -p /etc/grafana/provisioning/dashboards \
     && mkdir -p /var/log/grafana \
+    && mkdir -p /usr/share/grafana/data \
     && chown -R grafana:grafana /var/lib/grafana \
     && chown -R grafana:grafana /etc/grafana/provisioning \
     && chown -R grafana:grafana /var/log/grafana \
+    && chown -R grafana:grafana /usr/share/grafana/data \
     && chmod -R 750 /var/lib/grafana \
-    && chmod -R 750 /usr/share/grafana \
+    && chmod -R 755 /usr/share/grafana \
     && chmod -R 750 /etc/grafana/provisioning \
     && chmod -R 750 /var/log/grafana \
+    && chmod -R 750 /usr/share/grafana/data \
     && apk del curl
 
 CMD su-exec grafana grafana-server  \
