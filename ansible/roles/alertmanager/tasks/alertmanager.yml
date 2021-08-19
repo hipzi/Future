@@ -13,12 +13,9 @@
     chdir: /home/hipzi/alertmanager/
     cmd: docker-compose up -d --force-recreate  
 
-- name: Add port alertmanager and smtp to firewalld
+- name: Add port alertmanager to firewalld
   firewalld:
-    port: "{{ item }}"
+    port: 9093/tcp
     permanent: yes
     state: enabled
-  loop:
-    - 9093/tcp
-    - 587/tcp
   notify: Reload firewalld
