@@ -58,11 +58,4 @@ RUN apk add --no-cache --virtual .build-deps \
 	\
 	haproxy -v
 
-STOPSIGNAL SIGUSR1
-
-COPY config-haproxy.sh /usr/local/bin/
-RUN ln -s usr/local/bin/config-haproxy.sh / \
-        && chmod +x /config-haproxy.sh
-ENTRYPOINT ["/config-haproxy.sh"]
-
 CMD ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
