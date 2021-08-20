@@ -29,5 +29,9 @@ RUN apk add php7-apcu \
     && rm -rf /var/cache/apk/* \
 	&& adduser -D -g 'www' www 
 
+COPY ./.env ./config-php.sh /usr/src/
+RUN chmod +x /usr/src/config-php.sh
+
+ENTRYPOINT ["/usr/src/config-php.sh"]
 EXPOSE 9000
 CMD ["php-fpm7", "-F"]
