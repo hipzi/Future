@@ -3,20 +3,20 @@
     name: nfs-utils
     state: latest
 
-- name: Creates directory wordpress
-  file:
-    path: /home/hipzi/wordpress
-    state: directory
+- name: Transfer directory nginx
+  copy:
+    src: /home/hipzi/Future/docker/nginx/
+    dest: /home/hipzi/nginx/
 
-- name: Create a mountable directory if it does not exist
+- name: Create a mountable directory 
   file:
-    path: /home/hipzi/wordpress/wp-content
+    path: /home/hipzi/nginx/wp-content
     state: directory
 
 - name: Mount an NFS volume
   mount:
     src: 192.168.1.14:/home/hipzi/wp-content
-    path: /home/hipzi/wordpress/wp-content
+    path: /home/hipzi/nginx/wp-content
     opts: rw,sync
     state: mounted
     fstype: nfs
