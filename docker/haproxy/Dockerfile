@@ -1,6 +1,6 @@
 FROM alpine:3.13.2
 
-ENV haproxy_version=2.2.16-r1
+ENV haproxy_version 2.2.16-r1
 
 RUN addgroup --gid 99 --system haproxy; \
 	adduser \
@@ -16,4 +16,4 @@ RUN addgroup --gid 99 --system haproxy; \
 
 RUN apk add --no-cache haproxy=${haproxy_version}
 EXPOSE 80
-CMD ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
+ENTRYPOINT ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
