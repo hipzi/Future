@@ -8,6 +8,10 @@
     src: /home/hipzi/Future/docker/prometheus/
     dest: /home/hipzi/prometheus/
 
+- name: Transfer directory prometheus
+  docker_network:
+    name: monitoring-network
+    
 - name: Execute the docker compose prometheus
   shell:
     chdir: /home/hipzi/prometheus/

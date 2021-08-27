@@ -6,7 +6,7 @@
 - name: Execute the docker compose wordpress
   shell:
     chdir: /home/hipzi/phpfpm/
-    cmd: docker-compose up -d 
+    cmd: docker-compose up -d --force-recreate
 
 - name: Open port webserver to firewalld
   firewalld:

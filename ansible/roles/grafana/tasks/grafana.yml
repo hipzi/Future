@@ -11,7 +11,7 @@
 - name: Execute the docker compose grafana
   shell:
     chdir: /home/hipzi/grafana/
-    cmd: docker-compose up -d 
+    cmd: docker-compose up -d --force-recreate
 
 - name: Open port grafana to firewalld
   firewalld:
