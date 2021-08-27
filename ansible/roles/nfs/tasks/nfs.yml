@@ -49,7 +49,7 @@
 - name: NFS apply change configure
   shell: systemctl reload nfs;exportfs -rav
 
-- name: Open port nfs and rpcbind to firewalld
+- name: Open port (nfs, rpcbind, mountd) to firewalld
   firewalld:
     port: "{{ item }}"
     permanent: yes
@@ -57,4 +57,5 @@
   loop:
     - 2049/tcp
     - 111/tcp
+    - 20048/tcp
   notify: Reload firewalld

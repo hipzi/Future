@@ -30,8 +30,6 @@ RUN adduser -s /bin/false -D -H grafana \
 
 RUN sed -i "s|provisioning\s*=.*|provisioning = /etc/grafana/provisioning|g" /etc/grafana/grafana.ini
 
-ENTRYPOINT su-exec grafana grafana-server  \
-            --homepath="/usr/share/grafana"  \
-            --config="/etc/grafana/grafana.ini" 
+ENTRYPOINT ["su-exec","grafana","grafana-server", "--homepath='/usr/share/grafana'", "--config='/etc/grafana/grafana.ini'"]
 
 EXPOSE 3000

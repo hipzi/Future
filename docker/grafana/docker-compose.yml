@@ -10,3 +10,7 @@ services:
     volumes:
       - /home/hipzi/grafana/datasources:/etc/grafana/provisioning/datasources
       - /home/hipzi/grafana/dashboards:/etc/grafana/provisioning/dashboards
+
+networks:
+  monitoring-network:
+    external: true

@@ -10,3 +10,15 @@ services:
     volumes:
       - /home/hipzi/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - /home/hipzi/prometheus/rules.yml:/etc/prometheus/rules.yml
+    extra_hosts:
+      - "ansiblecontroller:192.168.1.10" 
+      - "haproxy-monitoring:192.168.1.11" 
+      - "wordpress-1:192.168.1.12" 
+      - "wordpress-2:192.168.1.13"
+      - "nfs:192.168.1.14" 
+      - "mariadb-master:192.168.1.15"
+      - "mariadb-slave:192.168.1.16" 
+
+networks:
+  monitoring-network:
+    external: true

@@ -6,7 +6,7 @@ services:
     container_name: phpfpm_container
     hostname: "phpfpm"
     networks:
-      - wordpress
+      - wordpress-network
 
   nginx:
     build: /home/hipzi/nginx
@@ -18,8 +18,8 @@ services:
       - /home/hipzi/nginx/nginx.conf:/etc/nginx/nginx.conf
       - /home/hipzi/nginx/wp-content:/var/www/wordpress/wp-content      
     networks:
-      - wordpress
+      - wordpress-network
 
 networks:
-  wordpress:
+  wordpress-network:
 
