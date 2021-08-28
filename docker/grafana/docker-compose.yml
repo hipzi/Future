@@ -3,6 +3,7 @@ version: "3"
 services:
   grafana:
     build: .
+    image: grafana:1.0
     container_name: grafana_container
     hostname: "grafana"
     ports:

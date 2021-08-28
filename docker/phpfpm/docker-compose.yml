@@ -3,6 +3,7 @@ version: "3"
 services:
   phpfpm:
     build: .
+    image: phpfpm:1.0
     container_name: phpfpm_container
     hostname: "phpfpm"
     networks:
@@ -10,6 +11,7 @@ services:
 
   nginx:
     build: /home/hipzi/nginx
+    image: nginx:1.0
     container_name: nginx_container
     hostname: "nginx"
     ports:

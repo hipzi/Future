@@ -3,6 +3,7 @@ version: "3"
 services:
   alertmanager:
     build: .
+    image: alertmanager:1.0
     container_name: alertmanager_container
     hostname: "alertmanager"
     ports:

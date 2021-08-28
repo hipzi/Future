@@ -3,6 +3,7 @@ version: "3"
 services:
   haproxy:
     build: .
+    image: haproxy:1.0
     container_name: haproxy_container
     hostname: "haproxy"
     ports:
