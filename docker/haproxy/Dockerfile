@@ -27,13 +27,11 @@ RUN apk add --no-cache --virtual .build-deps \
 		readline-dev \
 		tar \
 		zlib-dev \
-	\
 	&& wget -O haproxy.tar.gz "$HAPROXY_URL" \
 	&& echo "$HAPROXY_SHA256 *haproxy.tar.gz" | sha256sum -c \
 	&& mkdir -p /usr/src/haproxy \
 	&& tar -xzf haproxy.tar.gz -C /usr/src/haproxy --strip-components=1 \
 	&& rm haproxy.tar.gz \
-	\
 	&& makeOpts=' \
 		TARGET=linux-musl \
 		USE_GETADDRINFO=1 \
@@ -46,12 +44,11 @@ RUN apk add --no-cache --virtual .build-deps \
 			contrib/prometheus-exporter/service-prometheus.o \
 		" \
 	' \
-	\
 	&& eval "make -C /usr/src/haproxy all install-bin $makeOpts" \
-	\
 	&& mkdir -p /usr/local/etc/haproxy \
 	&& cp -R /usr/src/haproxy/examples/errorfiles /usr/local/etc/haproxy/errors \
 	&& rm -rf /usr/src/haproxy 
 
 EXPOSE 80 8404
 ENTRYPOINT ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
+
