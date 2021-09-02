@@ -14,7 +14,9 @@
         - { name: docker, version: 5.0.0 }
         - { name: docker-compose, version: 1.29.2 }
   rescue:
-    - notify: upgrade pip
+    - name: Notify handler for upgrade pip
+      shell: echo "upgrade pip"
+      notify: upgrade pip
 
 
 - name: Add docker compose repo
