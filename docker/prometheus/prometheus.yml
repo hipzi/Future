@@ -14,7 +14,7 @@ alerting:
    - static_configs:
      - targets:
        # Alertmanager's default port is 9093
-       - localhost:9093
+       - alertmanager:9093
 
 # A list of scrape configurations that specifies a set of
 # targets and parameters describing how to scrape them.
@@ -26,11 +26,11 @@ scrape_configs:
   - job_name: 'node_exporter_centos'
     scrape_interval: 10s
     static_configs:
-      - targets: ['ansiblecontroller:9100','localhost:9100','wordpress-1:9100','wordpress-2:9100','nfs:9100','mariadb-master:9100','mariadb-slave:9100']
+      - targets: ['ansiblecontroller:9100','haproxy-monitoring:9100','wordpress-1:9100','wordpress-2:9100','nfs:9100','mariadb-master:9100','mariadb-slave:9100']
   - job_name: 'haproxy'
     scrape_interval: 10s
     static_configs:
-      - targets: ['localhost:8404']
+      - targets: ['haproxy-monitoring:8404']
   - job_name: 'mysql'
     scrape_interval: 10s
     static_configs:

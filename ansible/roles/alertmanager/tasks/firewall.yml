@@ -1,0 +1,6 @@
+- name: Add port alertmanager to firewalld
+  firewalld:
+    port: 9093/tcp
+    permanent: yes
+    state: enabled
+  notify: Reload firewalld

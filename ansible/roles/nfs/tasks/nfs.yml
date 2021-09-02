@@ -3,16 +3,19 @@
     name: nfs-utils 
     state: latest
 
-- name: NFS apply change configure
-  shell: systemctl start nfs
+- name: Start NFS and enable it
+  service: 
+    name: nfs
+    state: started 
+    enabled: yes
 
 - name: Create a mountable directory 
   file:
     path: /home/hipzi/wp-content
     state: directory
     recurse: yes
-    owner: 1000
-    group: 1000
+    owner: '1000'
+    group: '1000'
 
 - name: Download wordpress
   get_url:
@@ -24,6 +27,7 @@
     src: /home/hipzi/wordpress-5.7.tar.gz
     dest: /home/hipzi/
     remote_src: yes
+    list_files: yes
 
 - name: Copy folder wp-content 
   copy:
@@ -45,9 +49,12 @@
   template:
     src: templates/exports.j2
     dest: /etc/exports
+  register: exports
 
-- name: NFS apply change configure
-  shell: systemctl reload nfs;exportfs -rav
+- name: Kick exportfs if /etc/exports changed
+  shell: exportfs -rav
+  when: exports.changed
+  notify: Reload nfs
 
 - name: Open port (nfs, rpcbind, mountd) to firewalld
   firewalld:

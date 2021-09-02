@@ -23,3 +23,4 @@ db_slave
 [docker:children]
 wordpress
 haproxy_monitoring
+

@@ -10,6 +10,8 @@ services:
       - "9093:9093"
     volumes:
       - /home/hipzi/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    networks:
+      - monitoring-network
 
 networks:
   monitoring-network:

@@ -1,3 +1,8 @@
+- name: Reload nfs
+  service:
+    name: nfs
+    state: reloaded
+
 - name: Reload firewalld
   service:
     name: firewalld

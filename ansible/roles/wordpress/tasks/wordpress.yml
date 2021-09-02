@@ -4,13 +4,7 @@
     dest: /home/hipzi/phpfpm/
 
 - name: Execute the docker compose wordpress
-  shell:
-    chdir: /home/hipzi/phpfpm/
-    cmd: docker-compose up -d --force-recreate
+  docker_compose:
+    project_src: /home/hipzi/phpfpm/
+    state: present
 
-- name: Open port webserver to firewalld
-  firewalld:
-    port: 80/tcp
-    permanent: yes
-    state: enabled
-  notify: Reload firewalld

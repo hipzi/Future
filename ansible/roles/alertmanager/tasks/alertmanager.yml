@@ -9,13 +9,7 @@
     dest: /home/hipzi/alertmanager/
 
 - name: Execute the docker compose alertmanager
-  shell:
-    chdir: /home/hipzi/alertmanager/
-    cmd: docker-compose up -d --force-recreate  
+  docker_compose:
+    project_src: /home/hipzi/alertmanager/
+    state: present
 
-- name: Add port alertmanager to firewalld
-  firewalld:
-    port: 9093/tcp
-    permanent: yes
-    state: enabled
-  notify: Reload firewalld

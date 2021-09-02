@@ -1,2 +1,7 @@
 - name: Transfer and execute a docker compose prometheus
   import_tasks: prometheus.yml
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+- name: Firewall
+  import_tasks: firewall.yml

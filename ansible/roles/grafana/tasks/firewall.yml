@@ -1,0 +1,6 @@
+- name: Open port grafana to firewalld
+  firewalld:
+    port: 3000/tcp
+    permanent: yes
+    state: enabled
+  notify: Reload firewalld

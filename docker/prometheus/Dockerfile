@@ -20,6 +20,6 @@ RUN adduser -s /bin/false -D -H prometheus \
     && chown prometheus:prometheus /var/lib/prometheus 
 
 EXPOSE 9090 
-ENTRYPOINT ["/usr/local/bin/prometheus", "--config.file /etc/prometheus/prometheus.yml", "--storage.tsdb.path /var/lib/prometheus/", "--web.console.libraries=/usr/share/prometheus/console_libraries", "--web.console.templates=/usr/share/prometheus/consoles"]	
+ENTRYPOINT ["/usr/local/bin/prometheus", "--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/var/lib/prometheus/", "--web.console.libraries=/usr/share/prometheus/console_libraries", "--web.console.templates=/usr/share/prometheus/consoles"]	
 
 

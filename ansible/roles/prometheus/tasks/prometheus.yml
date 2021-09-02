@@ -8,18 +8,12 @@
     src: /home/hipzi/Future/docker/prometheus/
     dest: /home/hipzi/prometheus/
 
-- name: Transfer directory prometheus
+- name: Make docker network
   docker_network:
     name: monitoring-network
-    
-- name: Execute the docker compose prometheus
-  shell:
-    chdir: /home/hipzi/prometheus/
-    cmd: docker-compose up -d --force-recreate  
 
-- name: Open port prometheus to firewalld
-  firewalld:
-    port: 9090/tcp
-    permanent: yes
-    state: enabled
-  notify: Reload firewalld
+- name: Execute the docker compose prometheus
+  docker_compose:
+    project_src: /home/hipzi/prometheus
+    state: present
+

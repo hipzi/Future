@@ -1,2 +1,8 @@
 - name: Transfer and execute a docker compose alertmanager
   import_tasks: alertmanager.yml
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+- name: Execute Firewall
+  import_tasks: firewall.yml
+

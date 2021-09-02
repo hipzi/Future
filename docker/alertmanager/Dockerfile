@@ -15,6 +15,5 @@ RUN adduser -s /bin/false -D -H alertmanager \
     && chown alertmanager:alertmanager /usr/local/bin/amtool \
     && apk del curl
 
-ENTRYPOINT ["/usr/local/bin/alertmanager","--config.file /etc/alertmanager/alertmanager.yml","--web.external-url http://prometheus:9093"]            
-
+ENTRYPOINT ["/usr/local/bin/alertmanager","--config.file=/etc/alertmanager/alertmanager.yml","--web.external-url=http://alertmanager:9093"]
 EXPOSE 9093

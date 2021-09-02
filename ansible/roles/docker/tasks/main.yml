@@ -3,3 +3,5 @@
 
 - name: Install Docker Compose
   import_tasks: docker_compose.yml
+  vars:
+    ansible_python_interpreter: /usr/bin/python3

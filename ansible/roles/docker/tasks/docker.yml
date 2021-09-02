@@ -24,3 +24,12 @@
     name: hipzi
     groups: docker
     append: yes
+
+- name: install pip and libselinux for python3
+  yum:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - python3-pip
+    - libselinux-python3
+

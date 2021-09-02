@@ -1,2 +1,7 @@
 - name: Transfer and execute a docker compose haproxy
   import_tasks: haproxy.yml
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+- name: Execute Firewall
+  import_tasks: firewall.yml
