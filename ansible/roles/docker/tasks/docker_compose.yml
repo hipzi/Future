@@ -11,8 +11,9 @@
   with_items:
     - { name: docker, version: 5.0.0 }
     - { name: docker-compose, version: 1.29.2 }
-  ignore_errors: true
   notify: upgrade pip
+  ignore_errors: true
+
 
 - name: Add docker compose repo
   get_url:
