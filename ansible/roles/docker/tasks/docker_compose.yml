@@ -3,16 +3,18 @@
     name: requests
     executable: pip3
 
-- name: install docker SDK and docker-compose
-  pip:
-    name: "{{ item.name }}"
-    version: "{{ item.version }}"
-    executable: pip3
-  with_items:
-    - { name: docker, version: 5.0.0 }
-    - { name: docker-compose, version: 1.29.2 }
-  notify: upgrade pip
-  ignore_errors: true
+- name: Handle the error install docker-compose
+  block:
+    - name: install docker SDK and docker-compose
+      pip:
+        name: "{{ item.name }}"
+        version: "{{ item.version }}"
+        executable: pip3
+      with_items:
+        - { name: docker, version: 5.0.0 }
+        - { name: docker-compose, version: 1.29.2 }
+  rescue:
+    notify: upgrade pip
 
 
 - name: Add docker compose repo
