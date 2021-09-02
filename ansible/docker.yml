@@ -2,6 +2,7 @@
   hosts: docker
   remote_user: hipzi
   become: yes
+  force_handlers: true
 
   roles:
     - docker

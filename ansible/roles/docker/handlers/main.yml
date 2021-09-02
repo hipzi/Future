@@ -1,0 +1,8 @@
+- name: upgrade pip
+  pip: 
+    name: "{{ item }}"
+    state: latest
+    executable: pip3    
+  loop:
+    - pip
+    - docker-compose       
