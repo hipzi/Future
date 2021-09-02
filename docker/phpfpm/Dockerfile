@@ -1,6 +1,6 @@
 FROM alpine:3.13.2
 
-RUN apk add php7-apcu \
+RUN apk add --no-cache php7-apcu \
         php7-bcmath \
         php7-bz2 \
         php7-ctype \
@@ -26,8 +26,7 @@ RUN apk add php7-apcu \
         php7-xmlreader \
         php7-xmlrpc \
         php7-zip \
-    && rm -rf /var/cache/apk/* \
-	&& adduser -D -g 'www' www 
+    && adduser -D -g 'www' www 
 
 COPY ./.env ./config-php.sh /usr/src/
 RUN chmod +x /usr/src/config-php.sh

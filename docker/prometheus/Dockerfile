@@ -4,8 +4,7 @@ ENV prometheus_version 2.26.0
 
 RUN adduser -s /bin/false -D -H prometheus \
     && apk update \
-    && apk --no-cache add curl \
-    && apk add supervisor \
+    && apk add --no-cache curl \
     && curl -LO https://github.com/prometheus/prometheus/releases/download/v${prometheus_version}/prometheus-${prometheus_version}.linux-amd64.tar.gz \
     && tar -xvzf prometheus-${prometheus_version}.linux-amd64.tar.gz \
     && mkdir -p /etc/prometheus /var/lib/prometheus \

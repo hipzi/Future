@@ -5,7 +5,7 @@ ENV PATH=/usr/share/grafana/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bi
 
 RUN adduser -s /bin/false -D -H grafana \
     && apk update \
-    && apk --no-cache add curl libc6-compat su-exec \
+    && apk add --no-cache curl libc6-compat su-exec \
     && curl -LO https://dl.grafana.com/oss/release/grafana-${grafana_version}.linux-amd64.tar.gz \
     && tar -xvzf grafana-${grafana_version}.linux-amd64.tar.gz \
     && cp -R grafana-${grafana_version} /usr/share/grafana \
@@ -30,5 +30,6 @@ RUN adduser -s /bin/false -D -H grafana \
 
 RUN sed -i "s|provisioning\s*=.*|provisioning = /etc/grafana/provisioning|g" /etc/grafana/grafana.ini
 
-ENTRYPOINT ["su-exec","grafana","grafana-server", "--homepath=/usr/share/grafana", "--config=/etc/grafana/grafana.ini"]
 EXPOSE 3000
+ENTRYPOINT ["su-exec","grafana","grafana-server", "--homepath=/usr/share/grafana", "--config=/etc/grafana/grafana.ini"]
+
