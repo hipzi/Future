@@ -24,7 +24,7 @@
     name: '' 
     host_all: yes 
     state: absent
- args:
+  args:
     warn: false
 
 - name: Change root password
