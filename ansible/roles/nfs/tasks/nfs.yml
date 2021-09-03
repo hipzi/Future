@@ -18,11 +18,13 @@
   unarchive:
     src: /home/hipzi/wordpress-5.7.tar.gz
     dest: /home/hipzi/
+    remote_src: yes
 
 - name: Copy folder wp-content 
   copy:
     src: /home/hipzi/wordpress/wp-content
     dest: /home/hipzi/
+    remote_src: yes
 
 - name: Change owner in mountable directory 
   file:
