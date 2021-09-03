@@ -24,8 +24,6 @@
     name: '' 
     host_all: yes 
     state: absent
-  args:
-    warn: false
 
 - name: Change root password
   mysql_user: 
