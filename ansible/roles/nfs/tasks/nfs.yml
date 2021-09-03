@@ -9,31 +9,28 @@
     state: started 
     enabled: yes
 
-- name: Create a mountable directory 
-  file:
-    path: /home/hipzi/wp-content
-    state: directory
-    recurse: yes
-    owner: '1000'
-    group: '1000'
-
 - name: Download wordpress
   get_url:
     url: https://wordpress.org/wordpress-5.7.tar.gz
     dest: /home/hipzi/
 
 - name: Extract wordpress
-  ansible.builtin.unarchive:
+  unarchive:
     src: /home/hipzi/wordpress-5.7.tar.gz
     dest: /home/hipzi/
-    remote_src: yes
-    list_files: yes
 
 - name: Copy folder wp-content 
   copy:
     src: /home/hipzi/wordpress/wp-content
     dest: /home/hipzi/
-    remote_src: yes
+
+- name: Change owner in mountable directory 
+  file:
+    path: /home/hipzi/wp-content
+    state: directory
+    recurse: yes
+    owner: '1000'
+    group: '1000'    
 
 - name: Remove wordpress
   file:
