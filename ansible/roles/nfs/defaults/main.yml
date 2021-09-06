@@ -1,1 +1,5 @@
-path_file_shared: /home/hipzi/wp-content
+path_file_shared: /home/hipzi/wordpress
+mariadb_database: wordpress
+mariadb_user: wordpressuser
+mariadb_user_password: w0rd^Ress1!
+mariadb_host: 192.168.1.15

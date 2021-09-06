@@ -20,24 +20,22 @@
     dest: /home/hipzi/
     remote_src: yes
 
-- name: Copy folder wp-content 
-  copy:
-    src: /home/hipzi/wordpress/wp-content
-    dest: /home/hipzi/
-    remote_src: yes
+- name: Copy script config wordpress
+  template:
+    src: templates/config-wordpress.sh.j2
+    dest: /usr/src/config-wordpress.sh
+
+- name: Execute the config wordpress
+  shell: bash /usr/src/config-wordpress.sh
 
 - name: Change owner in mountable directory 
   file:
-    path: /home/hipzi/wp-content
+    path: /home/hipzi/wordpress
     state: directory
     recurse: yes
     owner: '1000'
-    group: '1000'    
-
-- name: Remove wordpress
-  file:
-    path: /home/hipzi/wordpress
-    state: absent
+    group: '1000'
+    mode: '0755'    
 
 - name: Remove wordpress.tar.gz
   file:

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+MariaDB_DATABASE={{ mariadb_database }}
+MariaDB_USER={{ mariadb_user }}
+MariaDB_USER_PASSWORD={{ mariadb_user_password }}
+MariaDB_HOST={{ mariadb_host }}
+
+awk '
+	/put your unique phrase here/ {
+		cmd = "head -c1m /dev/urandom | sha1sum | cut -d\\  -f1"
+		cmd | getline str
+		close(cmd)
+		gsub("put your unique phrase here", str)
+	}
+	{ print }
+' /home/hipzi/wordpress/wp-config-sample.php > /home/hipzi/wordpress/wp-config.php
+
+sed -i "s/database_name_here/${MariaDB_DATABASE}/g" /home/hipzi/wordpress/wp-config.php
+sed -i "s/username_here/${MariaDB_USER}/g" /home/hipzi/wordpress/wp-config.php
+sed -i "s/password_here/${MariaDB_USER_PASSWORD}/g" /home/hipzi/wordpress/wp-config.php
+sed -i "s/localhost/${MariaDB_HOST}/g" /home/hipzi/wordpress/wp-config.php
