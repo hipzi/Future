@@ -8,15 +8,10 @@
     src: /home/hipzi/Future/docker/nginx/
     dest: /home/hipzi/nginx/
 
-- name: Create a mountable directory 
-  file:
-    path: /home/hipzi/nginx/wp-content
-    state: directory
-
 - name: Mount an NFS volume
   mount:
-    src: 192.168.1.14:/home/hipzi/wp-content
-    path: /home/hipzi/nginx/wp-content
+    src: 192.168.1.14:/home/hipzi/wordpress
+    path: /home/hipzi/wordpress
     opts: rw,sync
     state: mounted
     fstype: nfs

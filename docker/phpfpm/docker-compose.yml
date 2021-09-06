@@ -6,6 +6,8 @@ services:
     image: phpfpm:1.0
     container_name: phpfpm_container
     hostname: "phpfpm"
+    volumes:
+      - /home/hipzi/wordpress:/var/www/wordpress
     networks:
       - wordpress-network
 
@@ -18,7 +20,7 @@ services:
       - "80:80"
     volumes:
       - /home/hipzi/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - /home/hipzi/nginx/wp-content:/var/www/wordpress/wp-content      
+      - /home/hipzi/wordpress:/var/www/wordpress
     networks:
       - wordpress-network
 
