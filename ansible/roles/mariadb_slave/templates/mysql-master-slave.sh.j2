@@ -7,8 +7,6 @@ MYSQL_ROOT_PASSWORD={{ mysqlpass.root }}
 MYSQL_USER_REPLICA={{ mysqluser.replica }}
 MYSQL_USER_PASSWORD_REPLICA={{ mysqlpass.replica }}
  
-echo "MASTER: $MASTER_HOST"
- 
 mysql -h $MASTER_HOST "-u$MYSQL_ROOT_USER" "-p$MYSQL_ROOT_PASSWORD" <<-EOSQL &
 	GRANT REPLICATION SLAVE ON *.* TO '$MYSQL_USER_REPLICA'@'$SLAVE_HOST' IDENTIFIED BY '$MYSQL_USER_PASSWORD_REPLICA';
 	FLUSH PRIVILEGES;
@@ -17,12 +15,9 @@ EOSQL
 MASTER_STATUS=$(mysql -h $MASTER_HOST "-u$MYSQL_ROOT_USER" "-p$MYSQL_ROOT_PASSWORD" -e "SHOW MASTER STATUS;" | awk 'FNR == 2 {print $1 " " $2}')
 LOG_FILE=$(echo $MASTER_STATUS | cut -f1 -d ' ')
 LOG_POS=$(echo $MASTER_STATUS | cut -f2 -d ' ')
-echo "  - Current log file is $LOG_FILE and log position is $LOG_POS" 
  
-echo "SLAVE: $SLAVE_HOST"
-echo "  - Setting up slave replication"
+# Setting up slave replication"
 mysql -h $SLAVE_HOST "-u$MYSQL_ROOT_USER" "-p$MYSQL_ROOT_PASSWORD" <<-EOSQL &
-    RESET SLAVE ALL;
     STOP SLAVE;
     CHANGE MASTER TO MASTER_HOST='$MASTER_HOST',
     MASTER_USER='$MYSQL_USER_REPLICA',
@@ -36,7 +31,7 @@ sleep 2
 # Check if replication status is OK
 SLAVE_OK=$(mysql -h $SLAVE_HOST "-u$MYSQL_ROOT_USER" "-p$MYSQL_ROOT_PASSWORD" -e "SHOW SLAVE STATUS\G;" | grep 'Waiting for master')
 if [ -z "$SLAVE_OK" ]; then
-    echo "  - Error ! Wrong slave IO state."
+    echo "Error ! Wrong slave IO state."
 else
-    echo "  - Slave IO state OK"
+    echo "Slave IO state OK"
 fi

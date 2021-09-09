@@ -11,3 +11,8 @@
 
 - name: Execute the script mysql-master-slave
   command: bash /home/hipzi/scripts/mysql-master-slave.sh
+  register: test_slave
+  retries: 5
+  delay: 5
+  until: test_slave.stdout == "Slave IO state OK"
+  
