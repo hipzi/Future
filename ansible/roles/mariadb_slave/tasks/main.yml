@@ -1,5 +1,2 @@
-- name: Config my.cnf for mariadb master
-  import_tasks: mariadb_slave.yml
-
 - name: Transfer and execute script mysql-master-slave
-  import_tasks: script_mariadb_slave.yml  
+  import_tasks: mariadb_slave.yml

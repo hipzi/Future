@@ -4,3 +4,17 @@
     dest: /etc/my.cnf
   notify: Restart Mariadb
   
+- name: Force all notified handlers to run at this point, not waiting for normal sync points
+  meta: flush_handlers
+
+- name: Transfer the script mysql-master-slave
+  template:
+    src: templates/mysql-master-slave.sh.j2
+    dest: /home/hipzi/scripts/mysql-master-slave.sh
+
+- name: Execute the script mysql-master-slave
+  command: bash /home/hipzi/scripts/mysql-master-slave.sh
+  register: test_slave
+  retries: 5
+  delay: 5
+  until: test_slave.stdout == "Slave IO state OK"  
