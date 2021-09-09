@@ -3,30 +3,4 @@
     src: templates/my.cnf-slave.j2
     dest: /etc/my.cnf
   notify: Restart Mariadb
-
-- name: Transfer the script mysql-master-slave
-  template:
-    src: templates/mysql-master-slave.sh.j2
-    dest: /home/hipzi/scripts/mysql-master-slave.sh
-
-- name: Execute the script mysql-master-slave
-  command: bash /home/hipzi/scripts/mysql-master-slave.sh
-  register: test_slave
-  retries: 10
-  delay: 5
-  until: test_slave.stdout == "Slave IO state OK"
-  ignore_errors: yes
-
-- name: Test Position Master
-  shell: mysql -h 192.168.1.15 -uroot -pr00tw0rd^Ress1! -e "SHOW MASTER STATUS\G;" | awk 'FNR == 3 {print $2}'
-  register: log_master
-
-- name: Test Position Slave
-  shell: mysql -h 192.168.1.16 -uroot -pr00tw0rd^Ress1! -e "SHOW SLAVE STATUS\G;" | awk 'FNR == 8 {print $2}'
-  register: log_slave
-
-- name: Debug Slave
-  debug:
-    msg: "true"
-  when: log_master.stdout == log_slave.stdout  
   
