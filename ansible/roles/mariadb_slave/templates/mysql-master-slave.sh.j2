@@ -22,6 +22,7 @@ echo "  - Current log file is $LOG_FILE and log position is $LOG_POS"
 echo "SLAVE: $SLAVE_HOST"
 echo "  - Setting up slave replication"
 mysql -h $SLAVE_HOST "-u$MYSQL_ROOT_USER" "-p$MYSQL_ROOT_PASSWORD" <<-EOSQL &
+    RESET SLAVE ALL;
     STOP SLAVE;
     CHANGE MASTER TO MASTER_HOST='$MASTER_HOST',
     MASTER_USER='$MYSQL_USER_REPLICA',

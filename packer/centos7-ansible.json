@@ -46,9 +46,8 @@
       "type": "shell",      
       "inline": [
         "sudo yum -y update",
-        "sudo yum -y install git",
+        "sudo yum -y install git ansible",
         "git clone https://github.com/hipzi/Future.git",
-        "sudo yum -y install ansible",
         "ssh-keygen -t rsa -N '' -f /home/hipzi/.ssh/id_rsa <<< y",
         "cd /home/hipzi/Future/ansible",
         "ansible-playbook automation.yml"
