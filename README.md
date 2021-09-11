@@ -1,5 +1,6 @@
 # Future
     
+    
     ├── ansible
     │   ├── ansible.cfg
     │   ├── automation.yml
@@ -11,14 +12,18 @@
     │   ├── monitoring.yml
     │   ├── nfs_server.yml
     │   ├── node_exporter.yml
+    │   ├── pass.txt
     │   ├── roles
     │   │   ├── alertmanager
     │   │   │   ├── handlers
     │   │   │   │   └── main.yml
     │   │   │   └── tasks
     │   │   │       ├── alertmanager.yml
+    │   │   │       ├── firewall.yml
     │   │   │       └── main.yml
     │   │   ├── docker
+    │   │   │   ├── handlers
+    │   │   │   │   └── main.yml
     │   │   │   └── tasks
     │   │   │       ├── docker_compose.yml
     │   │   │       ├── docker.yml
@@ -37,12 +42,14 @@
     │   │   │   ├── handlers
     │   │   │   │   └── main.yml
     │   │   │   └── tasks
+    │   │   │       ├── firewall.yml
     │   │   │       ├── grafana.yml
     │   │   │       └── main.yml
     │   │   ├── haproxy
     │   │   │   ├── handlers
     │   │   │   │   └── main.yml
     │   │   │   └── tasks
+    │   │   │       ├── firewall.yml
     │   │   │       ├── haproxy.yml
     │   │   │       └── main.yml
     │   │   ├── mariadb
@@ -88,6 +95,7 @@
     │   │   │   │   ├── main.yml
     │   │   │   │   └── nfs.yml
     │   │   │   └── templates
+    │   │   │       ├── config-wordpress.sh.j2
     │   │   │       └── exports.j2
     │   │   ├── node_exporter
     │   │   │   ├── defaults
@@ -103,6 +111,7 @@
     │   │   │   ├── handlers
     │   │   │   │   └── main.yml
     │   │   │   └── tasks
+    │   │   │       ├── firewall.yml
     │   │   │       ├── main.yml
     │   │   │       └── prometheus.yml
     │   │   ├── ssh
@@ -114,21 +123,15 @@
     │   │   ├── wordpress
     │   │   │   ├── defaults
     │   │   │   │   └── main.yml
-    │   │   │   ├── files
     │   │   │   ├── handlers
     │   │   │   │   └── main.yml
     │   │   │   ├── meta
     │   │   │   │   └── main.yml
-    │   │   │   ├── tasks
-    │   │   │   │   ├── main.yml
-    │   │   │   │   ├── nfs_client.yml
-    │   │   │   │   └── wordpress.yml
-    │   │   │   ├── templates
-    │   │   │   ├── tests
-    │   │   │   │   ├── inventory
-    │   │   │   │   └── test.yml
-    │   │   │   └── vars
-    │   │   │       └── main.yml
+    │   │   │   └── tasks
+    │   │   │       ├── firewall.yml
+    │   │   │       ├── main.yml
+    │   │   │       ├── nfs_client.yml
+    │   │   │       └── wordpress.yml
     │   │   └── wordpress_installation
     │   │       └── tasks
     │   │           ├── main.yml
@@ -149,35 +152,31 @@
     │   │   ├── datasources
     │   │   │   └── prometheus.yml
     │   │   ├── docker-compose.yml
-    │   │   ├── Dockerfile
-    │   │   └── grafana.ini
+    │   │   └── Dockerfile
     │   ├── haproxy
-    │   │   ├── config-haproxy.sh
     │   │   ├── docker-compose.yml
     │   │   ├── Dockerfile
     │   │   └── haproxy.cfg
     │   ├── nginx
-    │   │   └── nginx.conf
-    │   ├── prometheus
-    │   │   ├── docker-compose.yml
     │   │   ├── Dockerfile
-    │   │   ├── prometheus.yml
-    │   │   ├── rules.yml
-    │   │   └── supervisord.conf
-    │   └── wordpress
-    │       ├── config-php.sh
-    │       ├── config-wordpress.sh
+    │   │   └── nginx.conf
+    │   ├── phpfpm
+    │   │   ├── config-php.sh
+    │   │   ├── docker-compose.yml
+    │   │   └── Dockerfile
+    │   └── prometheus
     │       ├── docker-compose.yml
     │       ├── Dockerfile
-    │       ├── php.ini
-    │       ├── supervisord.conf
-    │       └── www.conf
+    │       ├── prometheus.yml
+    │       └── rules.yml
     ├── packer
+    │   ├── centos7-ansible.json
     │   ├── centos7.json
     │   ├── create_vm.sh
     │   ├── install_packer.sh
     │   └── kickstart
     │       └── ks.cfg
     └── README.md
+
 
 
