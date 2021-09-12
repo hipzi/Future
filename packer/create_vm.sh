@@ -3,7 +3,7 @@
 vmName=("haproxy-monitoring" "wordpress-1" "wordpress-2" "nfs" "mariadb-master" "mariadb-slave")
 ip=("192.168.1.11" "192.168.1.12" "192.168.1.13" "192.168.1.14" "192.168.1.15" "192.168.1.16")
 vmAnsible="ansiblecontroller"
-ipAnsible="192.168.1.10"
+ipAnsible="192.168.1.17"
 i=0
 
 for value in "${vmName[@]}"

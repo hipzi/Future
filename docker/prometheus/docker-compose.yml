@@ -12,7 +12,7 @@ services:
       - /home/hipzi/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - /home/hipzi/prometheus/rules.yml:/etc/prometheus/rules.yml
     extra_hosts:
-      - "ansiblecontroller:192.168.1.10" 
+      - "ansiblecontroller:192.168.1.17" 
       - "haproxy-monitoring:192.168.1.11" 
       - "wordpress-1:192.168.1.12" 
       - "wordpress-2:192.168.1.13"
