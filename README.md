@@ -125,8 +125,6 @@
     │   │   │   │   └── main.yml
     │   │   │   ├── handlers
     │   │   │   │   └── main.yml
-    │   │   │   ├── meta
-    │   │   │   │   └── main.yml
     │   │   │   └── tasks
     │   │   │       ├── firewall.yml
     │   │   │       ├── main.yml
@@ -177,6 +175,7 @@
     │   └── kickstart
     │       └── ks.cfg
     └── README.md
+
 
 
 
